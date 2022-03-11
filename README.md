@@ -115,4 +115,4 @@ This module creates a Red Hat OpenShift Cluster across all three subnets provisi
 
 ## Overriding Variables
 
-This template uses a [vpc module](./ez_vpc/vpc) to create the network architecture. A complete custom network architecture can be created from this template by passing stringified `json` data into the `override_json` variable. For an example of a valid JSON file, see [override-json.json](./override-json.json)
+This template uses a [vpc module](./ez_vpc/ez_vpc_cluster) to create the network architecture. A complete custom network architecture can be created from this template by passing stringified `json` data into the `override_json` variable. For an example of a valid JSON file, see [override-json.json](./override-json.json)

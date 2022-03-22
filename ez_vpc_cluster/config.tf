@@ -25,7 +25,7 @@ module "dynamic_acl_allow_rules" {
 ##############################################################################
 
 locals {
-  override = jsondecode(var.override_json)
+  override = jsondecode(var.override ? file("../override.json") : "{}")
   ##############################################################################
   # List of subnets for dynamic ACL rule creation
   ##############################################################################
@@ -105,16 +105,22 @@ locals {
     ##############################################################################
     # ACL rules
     ##############################################################################
-    acl_rules = flatten([
-      module.dynamic_acl_allow_rules.rules,
+    acls = [
       {
-        name        = "allow-all-outbound"
-        action      = "allow"
-        direction   = "outbound"
-        destination = "0.0.0.0/0"
-        source      = "0.0.0.0/0"
+        name              = "acl"
+        add_cluster_rules = true
+        rules = flatten([
+          module.dynamic_acl_allow_rules.rules,
+          {
+            name        = "allow-all-outbound"
+            action      = "allow"
+            direction   = "outbound"
+            destination = "0.0.0.0/0"
+            source      = "0.0.0.0/0"
+          }
+        ])
       }
-    ])
+    ]
     ##############################################################################
 
     ##############################################################################
@@ -144,11 +150,12 @@ locals {
     ##############################################################################
 
     cluster = {
-      name         = "${var.prefix}-roks-cluster"
-      kube_version = local.kube_version
       subnets = [
         "${var.prefix}-subnet-zone-1", "${var.prefix}-subnet-zone-2", "${var.prefix}-subnet-zone-3"
       ]
+
+      name                            = "${var.prefix}-roks-cluster"
+      kube_version                    = local.kube_version
       entitlement                     = var.entitlement
       wait_till                       = var.wait_till
       machine_type                    = var.machine_type
@@ -158,13 +165,47 @@ locals {
 
     ##############################################################################
   }
-  acls = [
-    {
-      name              = "acl"
-      rules             = local.config.acl_rules
-      add_cluster_rules = true
+
+
+  env = {
+    vpc = {
+      prefix                      = lookup(local.override, "prefix", var.prefix)
+      vpc_name                    = lookup(local.override, "vpc_name", local.config.vpc_name)
+      classic_access              = lookup(local.override, "classic_access", local.config.classic_access)
+      network_acls                = lookup(local.override, "network_acls", local.config.acls)
+      use_public_gateways         = lookup(local.override, "use_public_gateways", local.config.use_public_gateways)
+      subnets                     = lookup(local.override, "subnets", local.config.subnets)
+      use_manual_address_prefixes = lookup(local.override, "use_manual_address_prefixes", null)
+      default_network_acl_name    = lookup(local.override, "default_network_acl_name", null)
+      default_security_group_name = lookup(local.override, "default_security_group_name", null)
+      default_routing_table_name  = lookup(local.override, "default_routing_table_name", null)
+      address_prefixes            = lookup(local.override, "address_prefixes", null)
+      routes                      = lookup(local.override, "routes", [])
+      vpn_gateways                = lookup(local.override, "vpn_gateways", [])
     }
-  ]
+    cluster = {
+      name                            = lookup(local.override, "name", local.config.cluster.name)
+      subnets                         = lookup(local.override, "cluster_subnets", local.config.cluster.subnets)
+      kube_version                    = lookup(local.override, "kube_version", local.config.cluster.kube_version)
+      entitlement                     = lookup(local.override, "entitlement", local.config.cluster.entitlement)
+      wait_till                       = lookup(local.override, "wait_till", local.config.cluster.wait_till)
+      machine_type                    = lookup(local.override, "machine_type", local.config.cluster.machine_type)
+      workers_per_zone                = lookup(local.override, "workers_per_zone", local.config.cluster.workers_per_zone)
+      disable_public_service_endpoint = lookup(local.override, "disable_public_service_endpoint", local.config.cluster.disable_public_service_endpoint)
+    }
+  }
+
+  string = "\"${jsonencode(local.env)}\""
+}
+
+##############################################################################
+
+##############################################################################
+# Convert Environment to escaped readable string
+##############################################################################
+
+data "external" "format_output" {
+  program = ["python3", "${path.module}/scripts/output.py", local.string]
 }
 
 ##############################################################################

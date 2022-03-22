@@ -77,13 +77,11 @@ variable "object_storage_name" {
 variable "create_new_cos_instance" {
   description = "Create a new Cloud Object Storage instance. If this is false, the instance from `object_storage_name` will be retrieved from data. If you are using an existing COS instance, make sure that it is in the same resource group where you plan to create this template."
   type        = bool
-  default     = true
 }
 
 variable "object_storage_plan" {
   description = "Plan for object storage. Can be `lite` or `standard`. This variable is only used when a new Object Storage instance i created."
   type        = string
-  default     = "standard"
 
   validation {
     error_message = "Object storage plan can only be `lite` or `standard`."
@@ -94,7 +92,6 @@ variable "object_storage_plan" {
 variable "roks_cluster_version" {
   description = "ROKS Cluster version. To get a list of valid versions, use the IBM Cloud CLI command `ibmcloud ks versions`. To use the default version, leave as `default`."
   type        = string
-  default     = "default"
 }
 
 variable "machine_type" {

@@ -114,7 +114,6 @@
               ]
           }
       ],
-      "prefix": "ez-vpc",
       "routes": [],
       "subnets": {
           "zone-1": [
@@ -150,5 +149,6 @@
       },
       "vpc_name": "vpc",
       "vpn_gateways": []
-  }
+  },
+  "prefix": "ez-vpc"
 }

@@ -25,7 +25,7 @@ module "dynamic_acl_allow_rules" {
 ##############################################################################
 
 locals {
-  override = jsondecode(var.override ? file("../override.json") : "{}")
+  override = jsondecode(var.override_json)
   ##############################################################################
   # List of subnets for dynamic ACL rule creation
   ##############################################################################
@@ -151,7 +151,7 @@ locals {
 
     cluster = {
       subnets = [
-        "${var.prefix}-subnet-zone-1", "${var.prefix}-subnet-zone-2", "${var.prefix}-subnet-zone-3"
+        "subnet-zone-1", "subnet-zone-2", "subnet-zone-3"
       ]
 
       name                            = "${var.prefix}-roks-cluster"
@@ -168,8 +168,8 @@ locals {
 
 
   env = {
+    prefix = lookup(local.override, "prefix", var.prefix)
     vpc = {
-      prefix                      = lookup(local.override, "prefix", var.prefix)
       vpc_name                    = lookup(local.override, "vpc_name", local.config.vpc_name)
       classic_access              = lookup(local.override, "classic_access", local.config.classic_access)
       network_acls                = lookup(local.override, "network_acls", local.config.acls)

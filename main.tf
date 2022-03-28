@@ -30,7 +30,7 @@ module "ez_vpc" {
   use_public_gateways     = var.use_public_gateways
   allow_inbound_traffic   = var.allow_inbound_traffic
   classic_access          = var.classic_access
-  override                = var.override
+  override_json           = var.override ? file("${path.module}/override.json") : "{}"
 }
 
 ##############################################################################

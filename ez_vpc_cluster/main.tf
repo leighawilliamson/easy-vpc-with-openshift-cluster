@@ -18,7 +18,7 @@ module "vpc" {
   resource_group_id           = data.ibm_resource_group.resource_group.id
   region                      = var.region
   tags                        = var.tags
-  prefix                      = local.env.vpc.prefix
+  prefix                      = local.env.prefix
   vpc_name                    = local.env.vpc.vpc_name
   classic_access              = local.env.vpc.classic_access
   network_acls                = local.env.vpc.network_acls
@@ -74,7 +74,7 @@ locals {
     ) :
     (subnet) => [
       for vpc_subnet in module.vpc.subnet_zone_list :
-      vpc_subnet if vpc_subnet.name == subnet
+      vpc_subnet if vpc_subnet.name == "${local.env.prefix}-${subnet}"
     ][0]
   }
 }

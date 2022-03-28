@@ -4,11 +4,11 @@
       "entitlement": "cloud_pak",
       "kube_version": "4.9.21_openshift",
       "machine_type": "bx2.4x16",
-      "name": "jv-test-roks-cluster",
+      "name": "ez-vpc-roks-cluster",
       "subnets": [
-          "jv-test-subnet-zone-1",
-          "jv-test-subnet-zone-2",
-          "jv-test-subnet-zone-3"
+          "subnet-zone-1",
+          "subnet-zone-2",
+          "subnet-zone-3"
       ],
       "wait_till": "IngressReady",
       "workers_per_zone": 2
@@ -29,7 +29,7 @@
                       "destination": "0.0.0.0/0",
                       "direction": "inbound",
                       "icmp": null,
-                      "name": "allow-inbound-jv-test-allow-all",
+                      "name": "allow-inbound-ez-vpc-allow-all",
                       "source": "0.0.0.0/0",
                       "tcp": null,
                       "udp": null
@@ -39,7 +39,7 @@
                       "destination": "0.0.0.0/0",
                       "direction": "outbound",
                       "icmp": null,
-                      "name": "allow-outbound-jv-test-allow-all",
+                      "name": "allow-outbound-ez-vpc-allow-all",
                       "source": "0.0.0.0/0",
                       "tcp": null,
                       "udp": null
@@ -49,7 +49,7 @@
                       "destination": "0.0.0.0/0",
                       "direction": "inbound",
                       "icmp": null,
-                      "name": "allow-inbound-jv-test-subnet-zone-1",
+                      "name": "allow-inbound-ez-vpc-subnet-zone-1",
                       "source": "10.10.10.0/24",
                       "tcp": null,
                       "udp": null
@@ -59,7 +59,7 @@
                       "destination": "10.10.10.0/24",
                       "direction": "outbound",
                       "icmp": null,
-                      "name": "allow-outbound-jv-test-subnet-zone-1",
+                      "name": "allow-outbound-ez-vpc-subnet-zone-1",
                       "source": "0.0.0.0/0",
                       "tcp": null,
                       "udp": null
@@ -69,7 +69,7 @@
                       "destination": "0.0.0.0/0",
                       "direction": "inbound",
                       "icmp": null,
-                      "name": "allow-inbound-jv-test-subnet-zone-2",
+                      "name": "allow-inbound-ez-vpc-subnet-zone-2",
                       "source": "10.20.10.0/24",
                       "tcp": null,
                       "udp": null
@@ -79,7 +79,7 @@
                       "destination": "10.20.10.0/24",
                       "direction": "outbound",
                       "icmp": null,
-                      "name": "allow-outbound-jv-test-subnet-zone-2",
+                      "name": "allow-outbound-ez-vpc-subnet-zone-2",
                       "source": "0.0.0.0/0",
                       "tcp": null,
                       "udp": null
@@ -89,7 +89,7 @@
                       "destination": "0.0.0.0/0",
                       "direction": "inbound",
                       "icmp": null,
-                      "name": "allow-inbound-jv-test-subnet-zone-3",
+                      "name": "allow-inbound-ez-vpc-subnet-zone-3",
                       "source": "10.30.10.0/24",
                       "tcp": null,
                       "udp": null
@@ -99,7 +99,7 @@
                       "destination": "10.30.10.0/24",
                       "direction": "outbound",
                       "icmp": null,
-                      "name": "allow-outbound-jv-test-subnet-zone-3",
+                      "name": "allow-outbound-ez-vpc-subnet-zone-3",
                       "source": "0.0.0.0/0",
                       "tcp": null,
                       "udp": null
@@ -114,7 +114,7 @@
               ]
           }
       ],
-      "prefix": "jv-test",
+      "prefix": "ez-vpc",
       "routes": [],
       "subnets": {
           "zone-1": [

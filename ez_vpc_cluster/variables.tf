@@ -145,10 +145,15 @@ variable "wait_till" {
 # Override Variables
 ##############################################################################
 
-variable "override" {
-  description = "Override any values with `override.json` JSON to create a completely custom network."
-  type        = bool
-  default     = false
+variable "override_json" {
+  description = "Override any values with JSON to create a completely custom network. All quotation marks must be correctly escaped."
+  type        = string
+  default     = "{}"
+
+  validation {
+    error_message = "Override JSON must be able to be parsed by Terraform."
+    condition     = can(jsondecode(var.override_json))
+  }
 }
 
 ##############################################################################

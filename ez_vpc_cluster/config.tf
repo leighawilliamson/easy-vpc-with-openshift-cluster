@@ -168,23 +168,24 @@ locals {
     
   }
 
+  override_vpc = lookup(local.override, "vpc", {})
   override_cluster = lookup(local.override, "cluster", {})
 
   env = {
     prefix = lookup(local.override, "prefix", var.prefix)
     vpc = {
-      vpc_name                    = lookup(local.override, "vpc_name", local.config.vpc_name)
-      classic_access              = lookup(local.override, "classic_access", local.config.classic_access)
-      network_acls                = lookup(local.override, "network_acls", local.config.acls)
-      use_public_gateways         = lookup(local.override, "use_public_gateways", local.config.use_public_gateways)
-      subnets                     = lookup(local.override, "subnets", local.config.subnets)
-      use_manual_address_prefixes = lookup(local.override, "use_manual_address_prefixes", null)
-      default_network_acl_name    = lookup(local.override, "default_network_acl_name", null)
-      default_security_group_name = lookup(local.override, "default_security_group_name", null)
-      default_routing_table_name  = lookup(local.override, "default_routing_table_name", null)
-      address_prefixes            = lookup(local.override, "address_prefixes", null)
-      routes                      = lookup(local.override, "routes", [])
-      vpn_gateways                = lookup(local.override, "vpn_gateways", [])
+      vpc_name                    = lookup(local.override_vpc, "vpc_name", local.config.vpc_name)
+      classic_access              = lookup(local.override_vpc, "classic_access", local.config.classic_access)
+      network_acls                = lookup(local.override_vpc, "network_acls", local.config.acls)
+      use_public_gateways         = lookup(local.override_vpc, "use_public_gateways", local.config.use_public_gateways)
+      subnets                     = lookup(local.override_vpc, "subnets", local.config.subnets)
+      use_manual_address_prefixes = lookup(local.override_vpc, "use_manual_address_prefixes", null)
+      default_network_acl_name    = lookup(local.override_vpc, "default_network_acl_name", null)
+      default_security_group_name = lookup(local.override_vpc, "default_security_group_name", null)
+      default_routing_table_name  = lookup(local.override_vpc, "default_routing_table_name", null)
+      address_prefixes            = lookup(local.override_vpc, "address_prefixes", null)
+      routes                      = lookup(local.override_vpc, "routes", [])
+      vpn_gateways                = lookup(local.override_vpc, "vpn_gateways", [])
     }
     cluster = {
       name                            = lookup(local.override_cluster, "name", local.config.cluster.name)

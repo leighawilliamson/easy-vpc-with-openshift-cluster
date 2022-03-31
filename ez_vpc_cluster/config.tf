@@ -164,8 +164,11 @@ locals {
     }
 
     ##############################################################################
+
+    
   }
 
+  override_cluster = lookup(local.override, "cluster", {})
 
   env = {
     prefix = lookup(local.override, "prefix", var.prefix)
@@ -184,14 +187,14 @@ locals {
       vpn_gateways                = lookup(local.override, "vpn_gateways", [])
     }
     cluster = {
-      name                            = lookup(local.override, "name", local.config.cluster.name)
-      subnets                         = lookup(local.override, "cluster_subnets", local.config.cluster.subnets)
-      kube_version                    = lookup(local.override, "kube_version", local.config.cluster.kube_version)
-      entitlement                     = lookup(local.override, "entitlement", local.config.cluster.entitlement)
-      wait_till                       = lookup(local.override, "wait_till", local.config.cluster.wait_till)
-      machine_type                    = lookup(local.override, "machine_type", local.config.cluster.machine_type)
-      workers_per_zone                = lookup(local.override, "workers_per_zone", local.config.cluster.workers_per_zone)
-      disable_public_service_endpoint = lookup(local.override, "disable_public_service_endpoint", local.config.cluster.disable_public_service_endpoint)
+      name                            = lookup(local.override_cluster, "name", local.config.cluster.name)
+      subnets                         = lookup(local.override_cluster, "subnets", local.config.cluster.subnets)
+      kube_version                    = lookup(local.override_cluster, "kube_version", local.config.cluster.kube_version)
+      entitlement                     = lookup(local.override_cluster, "entitlement", local.config.cluster.entitlement)
+      wait_till                       = lookup(local.override_cluster, "wait_till", local.config.cluster.wait_till)
+      machine_type                    = lookup(local.override_cluster, "machine_type", local.config.cluster.machine_type)
+      workers_per_zone                = lookup(local.override_cluster, "workers_per_zone", local.config.cluster.workers_per_zone)
+      disable_public_service_endpoint = lookup(local.override_cluster, "disable_public_service_endpoint", local.config.cluster.disable_public_service_endpoint)
     }
   }
 

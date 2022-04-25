@@ -3,7 +3,7 @@
 ##############################################################################
 
 provider "ibm" {
-  ibmcloud_api_key = var.ibmcloud_api_key
+  # ibmcloud_api_key = var.ibmcloud_api_key # comment out and remove variable for schematics runs
   region           = var.region
   ibmcloud_timeout = 60
 }

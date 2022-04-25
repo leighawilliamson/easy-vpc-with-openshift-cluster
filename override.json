@@ -2,13 +2,11 @@
   "cluster": {
       "disable_public_service_endpoint": true,
       "entitlement": "cloud_pak",
-      "kube_version": "4.9.21_openshift",
+      "kube_version": "default",
       "machine_type": "bx2.4x16",
-      "name": "ez-vpc-roks-cluster",
+      "name": "easy-vpc-roks-cluster",
       "subnets": [
-          "subnet-zone-1",
-          "subnet-zone-2",
-          "subnet-zone-3"
+          "subnet-zone-1"
       ],
       "wait_till": "IngressReady",
       "workers_per_zone": 2
@@ -23,95 +21,7 @@
           {
               "add_cluster_rules": true,
               "name": "acl",
-              "rules": [
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "inbound",
-                      "icmp": null,
-                      "name": "allow-inbound-ez-vpc-allow-all",
-                      "source": "0.0.0.0/0",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "outbound",
-                      "icmp": null,
-                      "name": "allow-outbound-ez-vpc-allow-all",
-                      "source": "0.0.0.0/0",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "inbound",
-                      "icmp": null,
-                      "name": "allow-inbound-ez-vpc-subnet-zone-1",
-                      "source": "10.10.10.0/24",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "10.10.10.0/24",
-                      "direction": "outbound",
-                      "icmp": null,
-                      "name": "allow-outbound-ez-vpc-subnet-zone-1",
-                      "source": "0.0.0.0/0",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "inbound",
-                      "icmp": null,
-                      "name": "allow-inbound-ez-vpc-subnet-zone-2",
-                      "source": "10.20.10.0/24",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "10.20.10.0/24",
-                      "direction": "outbound",
-                      "icmp": null,
-                      "name": "allow-outbound-ez-vpc-subnet-zone-2",
-                      "source": "0.0.0.0/0",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "inbound",
-                      "icmp": null,
-                      "name": "allow-inbound-ez-vpc-subnet-zone-3",
-                      "source": "10.30.10.0/24",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "10.30.10.0/24",
-                      "direction": "outbound",
-                      "icmp": null,
-                      "name": "allow-outbound-ez-vpc-subnet-zone-3",
-                      "source": "0.0.0.0/0",
-                      "tcp": null,
-                      "udp": null
-                  },
-                  {
-                      "action": "allow",
-                      "destination": "0.0.0.0/0",
-                      "direction": "outbound",
-                      "name": "allow-all-outbound",
-                      "source": "0.0.0.0/0"
-                  }
-              ]
+              "rules": []
           }
       ],
       "routes": [],
@@ -150,5 +60,5 @@
       "vpc_name": "vpc",
       "vpn_gateways": []
   },
-  "prefix": "ez-vpc"
+  "prefix": "easy-vpc"
 }

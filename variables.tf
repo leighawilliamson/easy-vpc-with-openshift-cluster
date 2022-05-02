@@ -24,7 +24,7 @@ variable "TF_VERSION" {
 variable "prefix" {
   description = "A unique identifier for resources. Must begin with a letter. This prefix will be prepended to any resources provisioned by this template."
   type        = string
-  default     = "ez-multizone-roks"
+  default     = "leighs"
 
   validation {
     error_message = "Prefix must begin and end with a letter and contain only letters, numbers, and - characters."
@@ -41,7 +41,7 @@ variable "region" {
 variable "resource_group" {
   description = "Name of existing resource group where all infrastructure will be provisioned"
   type        = string
-  default     = "asset-development"
+  default     = "Development-RG"
 
   validation {
     error_message = "Unique ID must begin and end with a letter and contain only letters, numbers, and - characters."
@@ -125,18 +125,18 @@ variable "machine_type" {
 variable "workers_per_zone" {
   description = "Number of workers to provision in each subnet"
   type        = number
-  default     = 2
+  default     = 1
 
   validation {
     error_message = "Each zone must contain at least 2 workers."
-    condition     = var.workers_per_zone >= 2
+    condition     = var.workers_per_zone >= 1
   }
 }
 
 variable "disable_public_service_endpoint" {
   description = "Disable public service endpoint for cluster. Once the service endpoint has been enabled, it cannot be disabled after cluster creation."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "entitlement" {

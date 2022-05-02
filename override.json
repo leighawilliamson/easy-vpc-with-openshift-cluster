@@ -1,6 +1,6 @@
 {
   "cluster": {
-      "disable_public_service_endpoint": true,
+      "disable_public_service_endpoint": false,
       "entitlement": "cloud_pak",
       "kube_version": "default",
       "machine_type": "bx2.4x16",

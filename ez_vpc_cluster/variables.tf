@@ -114,7 +114,7 @@ variable "workers_per_zone" {
 variable "disable_public_service_endpoint" {
   description = "Disable public service endpoint for cluster. Once the service endpoint has been enabled, it cannot be disabled after cluster creation."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "entitlement" {

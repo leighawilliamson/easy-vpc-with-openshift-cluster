@@ -10,7 +10,7 @@ tfx.plan("Easy Multizone ROKS Network", () => {
     "Easy VPC",
     "module.ez_vpc",
     tfx.resource("OpenShift Cluster", "ibm_container_vpc_cluster.cluster", {
-      disable_public_service_endpoint: true,
+      disable_public_service_endpoint: false,
       entitlement: "cloud_pak",
       flavor: "bx2.4x16",
       kube_version: tfx.expect("should contain _openshift", (kube_version) => {

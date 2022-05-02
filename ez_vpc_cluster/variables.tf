@@ -103,11 +103,11 @@ variable "machine_type" {
 variable "workers_per_zone" {
   description = "Number of workers to provision in each subnet"
   type        = number
-  default     = 2
+  default     = 1
 
   validation {
     error_message = "Each zone must contain at least 2 workers."
-    condition     = var.workers_per_zone >= 2
+    condition     = var.workers_per_zone >= 1
   }
 }
 

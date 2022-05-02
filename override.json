@@ -9,7 +9,7 @@
           "subnet-zone-1"
       ],
       "wait_till": "IngressReady",
-      "workers_per_zone": 2
+      "workers_per_zone": 1
   },
   "vpc": {
       "address_prefixes": null,
